@@ -30,6 +30,24 @@ Store.prototype.simSales = function () {
   return [this.cookieSales];
 };
 
+Store.prototype.render = function () {
+
+  var newStoreLog = document.createElement('tr');
+  newStoreLog.textContent = this.storeName;
+  body.appendChild(newStoreLog);
+  this.randCust();
+  this.simSales();
+  newStoreLog.id = this.storeName;
+
+  var storeRow = document.getElementById(this.storeName);
+
+  for (var j = 0; j < storeHours.length; j++){
+    var newCookieEst = document.createElement('td');
+    newCookieEst.textContent = this.cookieSales[j];
+    storeRow.appendChild(newCookieEst);
+  } 
+};
+
 new Store('1st and Pike', 23, 65, 6.3);
 new Store('SeaTac Airport', 3, 24, 1.2);
 new Store('Seattle Center', 11, 38, 3.7);
@@ -43,32 +61,23 @@ var body = document.getElementById('table-body');
 var foot = document.getElementById('table-foot');
 head.appendChild(document.createElement('th'));
 
-//Creating table rows and giving them IDs
-for (var i = 0; i < Store.cookieStores.length; i++){
-  var newStoreLog = document.createElement('tr');
-  newStoreLog.textContent = Store.cookieStores[i].storeName;
-  body.appendChild(newStoreLog);
-  Store.cookieStores[i].randCust();
-  Store.cookieStores[i].simSales();
-  newStoreLog.id = Store.cookieStores[i].storeName;
-}
-//Creating table columns by time
-for (var x = 0; x < storeHours.length; x++) {
-  var whatHour = document.createElement('th');
-  whatHour.textContent = storeHours[x];
-  head.appendChild(whatHour);
-}
-//Filling in with data from each class to corresponding row
-for (var k = 0; k < Store.cookieStores.length; k++){
-  var storeRow = document.getElementById(Store.cookieStores[k].storeName);
-
-  for (var j = 0; j < storeHours.length; j++){
-    var newCookieEst = document.createElement('td');
-    newCookieEst.textContent = Store.cookieStores[k].cookieSales[j];
-    storeRow.appendChild(newCookieEst);
+var createHeader = function () {
+  for (var x = 0; x < storeHours.length; x++) {
+    var whatHour = document.createElement('th');
+    whatHour.textContent = storeHours[x];
+    head.appendChild(whatHour);
   }
+};
+
+var createFooter = function() {
+  var totals = document.createElement('tr');
+  totals.textContent = 'Total';
+  foot.appendChild(totals);
+
+};
+
+createHeader();
+for (var k = 0; k < Store.cookieStores.length; k++){
+  Store.cookieStores[k].render();
 }
 
-var totals = document.createElement('tr');
-totals.textContent = 'Total';
-foot.appendChild(totals);
