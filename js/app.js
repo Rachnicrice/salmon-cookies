@@ -124,10 +124,13 @@ for (var i = 0; i < cookieStoreNames.length; i++){
   newStoreLog.textContent = cookieStoreNames[i];
   elementStoreSales.appendChild(newStoreLog);
   storeObjects[i].simSales();
+  newStoreLog.id = cookieStoreNames[i];
 
   for (var j = 0; j < storeHours.length; j++) {
     var whatHour = document.createElement('li');
-    whatHour.textContent = storeHours[j] + storeObjects[i].cookieSales[j];
+    whatHour.textContent = storeHours[j] + storeObjects[i].cookieSales[j] + ' cookies';
     elementStoreSales.appendChild(whatHour);
+
+    console.log(whatHour);
   }
 }
