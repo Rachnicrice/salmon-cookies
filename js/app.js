@@ -50,24 +50,24 @@ Store.prototype.render = function () {
   } 
 };
 
-var newRender = function () {
+// var newRender = function () {
 
-  for (var q = 0; q < newStores.length; q++) {
-    var addedStore = document.createElement('tr');
-    addedStore.textContent = newStores[q].storeName;
-    body.appendChild(addedStore);
-    newStores[q].randCust();
-    newStores[q].simSales();
-    addedStore.id = newStores[q].storeName;
+//   for (var q = 0; q < newStores.length; q++) {
+//     var addedStore = document.createElement('tr');
+//     addedStore.textContent = newStores[q].storeName;
+//     body.appendChild(addedStore);
+//     newStores[q].randCust();
+//     newStores[q].simSales();
+//     addedStore.id = newStores[q].storeName;
 
-    var addedRow  = document.getElementById(newStores[q].storeName);
-    for (var r = 0; r < storeHours.length; r++) {
-      var addedCookies = document.createElement('td');
-      addedCookies.textContent = newStores[q].cookieSales[r];
-      addedRow.appendChild(addedCookies);
-    }
-  }
-};
+//     var addedRow  = document.getElementById(newStores[q].storeName);
+//     for (var r = 0; r < storeHours.length; r++) {
+//       var addedCookies = document.createElement('td');
+//       addedCookies.textContent = newStores[q].cookieSales[r];
+//       addedRow.appendChild(addedCookies);
+//     }
+//   }
+// };
 
 new Store('1st and Pike', 23, 65, 6.3);
 new Store('SeaTac Airport', 3, 24, 1.2);
@@ -92,14 +92,22 @@ var createHeader = function () {
   }
 };
 
+// var createFooterTotals = function (hour) {
+//   var add = 0;
+//   var newAdd = 0;
+//   var sum = 0;
+//   for (var m = 0; m < Store.cookieStores.length; m++){
+//     add += Store.cookieStores[m].cookieSales[hour];
+//     newAdd += newStores[m].cookieSales[hour];
+//     sum = add + newAdd;
+//   }
+//   return sum;
+// };
+
 var createFooterTotals = function (hour) {
-  var add = 0;
-  var newAdd = 0;
   var sum = 0;
   for (var m = 0; m < Store.cookieStores.length; m++){
-    add += Store.cookieStores[m].cookieSales[hour];
-    newAdd += newStores[m].cookieSales[hour];
-    sum = add + newAdd;
+    sum += Store.cookieStores[m].cookieSales[hour];
   }
   return sum;
 };
@@ -139,10 +147,9 @@ var newRow = function (event) {
 
   newStores.push(new Store(nameStore, custMin, custMax, cookieAvg));
 
-  newRender();
+  Store.cookieStores[Store.cookieStores.length - 1].render();
   form.reset();
   console.log ('histort of newStores' + newStores);
-
 };
 
 form.addEventListener('submit', newRow);
