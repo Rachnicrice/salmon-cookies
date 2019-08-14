@@ -7,11 +7,22 @@
     <head>
       <h1>Salmon Cookie Sales</h1>
     </head>
-    <table>
-      <thead id='table-head'></thead>
-      <tbody id='table-body'></tbody>
-      <tfoot id='table-foot'></tfoot>
-    </table>
+    <Section>
+      <table>
+        <thead id='table-head'></thead>
+        <tbody id='table-body'></tbody>
+        <tfoot id='table-foot'></tfoot>
+      </table>
+    </Section>
+    <section>
+      <form id="store_form">
+        <input type="text" name="store_name" placeholder="Store Name" minlength="1" required>
+        <input type="text" name="min_cust" placeholder="Minimum Customers" minlength="1" required>
+        <input type="text" name="max_cust" placeholder="Maximun Customers" minlength="1" required>
+        <input type="text" name="avg_cookie" placeholder="Average Cookies per Customer" minlength="1" required>
+        <input id="submit_btn" type="submit">
+      </form>
+    </section>
     <script src="../js/app.js"></script>
   </body>
 </html>

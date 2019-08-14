@@ -2,6 +2,10 @@
 
 var storeHours = ['6am ', '7am ', '8am ', '9am ', '10am ', '11am ', '12pm ', '1pm ', '2pm ', '3pm ', '4pm ', '5pm ', '6pm ', '7pm ', '8pm '];
 
+Store.cookieStores = [];
+
+var newStores = [];
+var form = document.getElementById('store_form');
 
 function Store (name, minCust, maxCust, avgCookie) {
   this.storeName = name;
@@ -11,8 +15,6 @@ function Store (name, minCust, maxCust, avgCookie) {
   this.cookieSales = [];
   Store.cookieStores.push(this);
 }
-
-Store.cookieStores = [];
 
 Store.prototype.randCust = function () {
   var randomNumber = Math.random()*((this.mostCust + 1) - this.leastCust) + this.leastCust;
@@ -48,6 +50,25 @@ Store.prototype.render = function () {
   } 
 };
 
+var newRender = function () {
+
+  for (var q = 0; q < newStores.length; q++) {
+    var addedStore = document.createElement('tr');
+    addedStore.textContent = newStores[q].storeName;
+    body.appendChild(addedStore);
+    newStores[q].randCust();
+    newStores[q].simSales();
+    addedStore.id = newStores[q].storeName;
+
+    var addedRow  = document.getElementById(newStores[q].storeName);
+    for (var r = 0; r < storeHours.length; r++) {
+      var addedCookies = document.createElement('td');
+      addedCookies.textContent = newStores[q].cookieSales[r];
+      addedRow.appendChild(addedCookies);
+    }
+  }
+};
+
 new Store('1st and Pike', 23, 65, 6.3);
 new Store('SeaTac Airport', 3, 24, 1.2);
 new Store('Seattle Center', 11, 38, 3.7);
@@ -72,9 +93,13 @@ var createHeader = function () {
 };
 
 var createFooterTotals = function (hour) {
+  var add = 0;
+  var newAdd = 0;
   var sum = 0;
   for (var m = 0; m < Store.cookieStores.length; m++){
-    sum += Store.cookieStores[m].cookieSales[hour];
+    add += Store.cookieStores[m].cookieSales[hour];
+    newAdd += newStores[m].cookieSales[hour];
+    sum = add + newAdd;
   }
   return sum;
 };
@@ -103,6 +128,24 @@ var makeFooter = function (){
 for (var k = 0; k < Store.cookieStores.length; k++){
   Store.cookieStores[k].render();
 }
+
+var newRow = function (event) { 
+  event.preventDefault();
+
+  var nameStore = event.target.store_name.value;
+  var custMin = event.target.min_cust.value;
+  var custMax = event.target.max_cust.value;
+  var cookieAvg = event.target.avg_cookie.value;
+
+  newStores.push(new Store(nameStore, custMin, custMax, cookieAvg));
+
+  newRender();
+  form.reset();
+  console.log ('histort of newStores' + newStores);
+
+};
+
+form.addEventListener('submit', newRow);
 
 createHeader();
 makeFooter();
