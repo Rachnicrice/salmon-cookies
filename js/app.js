@@ -116,7 +116,7 @@ var newRow = function (event) {
   var custMax = event.target.max_cust.value;
   var cookieAvg = event.target.avg_cookie.value;
 
-  newStores.push(new Store(nameStore, custMin, custMax, cookieAvg));
+  new Store(nameStore, custMin, custMax, cookieAvg);
 
   Store.cookieStores[Store.cookieStores.length - 1].render();
   form.reset();
