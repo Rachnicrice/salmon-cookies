@@ -34,13 +34,16 @@ Store.prototype.simSales = function () {
 Store.prototype.render = function () {
 
   var newStoreLog = document.createElement('tr');
-  newStoreLog.textContent = this.storeName;
   body.appendChild(newStoreLog);
+  newStoreLog.id = this.storeName;
   this.randCust();
   this.simSales();
-  newStoreLog.id = this.storeName;
-
+  
   var storeRow = document.getElementById(this.storeName);
+
+  var rowHeader = document.createElement('td');
+  rowHeader.textContent = this.storeName;
+  storeRow.appendChild(rowHeader);
 
   for (var j = 0; j < storeHours.length; j++){
     var newCookieEst = document.createElement('td');
