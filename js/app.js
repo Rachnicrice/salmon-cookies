@@ -93,20 +93,49 @@ var makeFooter = function (){
   var totalFoot = document.createElement('td');
   totalFoot.textContent = 'Hourly Total';
   footRowLoc.appendChild(totalFoot);
+
+  var finalTotal = 0;
   
   for (var p = 0; p < storeHours.length; p++) {
     var newFoot = document.createElement('td');
-    // newFoot.textContent = createFooterTotals(p);
     var feeties = createFooterTotals(p);
     console.log(feeties);
     newFoot.textContent = feeties;
+    newFoot.id = storeHours[p];
     footRowLoc.appendChild(newFoot);
+
+    finalTotal += feeties;
   }
+
+  var lastCell = document.createElement ('td');
+  lastCell.textContent = finalTotal;
+  footRowLoc.appendChild(lastCell);
 };
 
 var removeFooter = function () {
   var footRowLoc = document.getElementById('foot-totals');
   foot.firstChild.removeChild();
+};
+
+var createStoreTotals = function () {
+  var storeTotal = document.createElement('th');
+  storeTotal.textContent = 'Daily Total';
+  head.appendChild(storeTotal);
+
+  for (var d = 0; d < Store.cookieStores.length; d++) {
+    var storeRow = document.getElementById(Store.cookieStores[d].storeName);
+
+    var sum = 0;
+
+    for (var f = 0; f < storeHours.length; f++) {
+      sum += Store.cookieStores[d].cookieSales[f];
+    }
+
+    var storeSum = document.createElement('td');
+    storeSum.textContent = sum;
+    storeRow.appendChild(storeSum);
+  }
+
 };
 
 for (var k = 0; k < Store.cookieStores.length; k++){
@@ -133,3 +162,4 @@ form.addEventListener('submit', newRow);
 
 createHeader();
 makeFooter();
+createStoreTotals();
