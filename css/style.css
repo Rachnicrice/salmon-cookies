@@ -30,19 +30,6 @@ head {
   z-index: 2;
 }
 
-.banner2 {
-  display: inline-block;
-  filter: grayscale(100);
-  margin-left: auto;
-  margin-right: auto;
-  max-height: 100%;
-  max-width: auto;
-  position: absolute;
-  top: 15px;
-  left: 350px;
-  z-index: 2;
-}
-
 h1 {
   color: salmon;
   font-size: 3em;
@@ -56,8 +43,12 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5em;
+  font-size: 2em;
+  line-height: 2em;
   font-weight: bold;
+  margin: 0px 200px 50px 500px;
+  max-width: 30%;
+  text-align: center
 }
 
 h3 {
@@ -157,6 +148,8 @@ footer {
   background: black;
   color: antiquewhite;
   height: 80px;
+  overflow: auto;
+  position: relative;
 }
 
 .locations {
@@ -177,6 +170,9 @@ footer {
   float: left;
   font-size: 1em;
   margin: 60px 2px 1px 2px;
+  position: absolute;
+  bottom: 10%;
+  left: 3%;
 }
 
 #table-foot {
@@ -219,4 +215,79 @@ span {
 #our-story {
   max-width: 80%;
   text-align: center;
+}
+
+#t-shirt {
+  margin: 2px 2px 15px 10px;
+}
+
+#store {
+  position: relative;
+}
+
+#merch {
+  position: absolute;
+  top: 5%;
+  right: 40%;
+  padding: 5px;
+  margin: 10px;
+  list-style-type: disc;
+  font-size: 2em;
+}
+
+#merch2 {
+  position: absolute;
+  top: 5%;
+  right: 2%;
+  padding: 5px;
+  margin: 10px;
+  list-style-type: disc;
+  font-size: 2em;
+}
+
+.merch:hover {
+  color: salmon;
+}
+
+#chinook {
+  max-width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 10%;
+  left: 40%
+}
+
+section {
+  position: relative;
+  overflow: auto;
+}
+
+#event1{
+  margin: 0px 0px 15px 150px;
+}
+
+#event2 {
+  margin: 0px 0px 15px 0px;
+  position: absolute;
+  top: 0;
+  left: 41%;
+}
+
+#event3 {
+  margin: 0px 20px 15px 0px;
+  position: absolute;
+  top: 0;
+  left: 70%;
+}
+
+.event {
+  display: inline-block;
+  max-width: 300px;
+  height: auto;
+  margin: 4px;
+}
+
+#pat {
+  float: left;
+  margin: 0px 15px 15px 20px;
 }
