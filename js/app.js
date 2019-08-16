@@ -104,6 +104,11 @@ var makeFooter = function (){
   }
 };
 
+var removeFooter = function () {
+  var footRowLoc = document.getElementById('foot-totals');
+  foot.firstChild.removeChild();
+};
+
 for (var k = 0; k < Store.cookieStores.length; k++){
   Store.cookieStores[k].render();
 }
@@ -119,8 +124,9 @@ var newRow = function (event) {
   new Store(nameStore, custMin, custMax, cookieAvg);
 
   Store.cookieStores[Store.cookieStores.length - 1].render();
+  removeFooter();
+  makeFooter();
   form.reset();
-  console.log ('histort of newStores' + newStores);
 };
 
 form.addEventListener('submit', newRow);
