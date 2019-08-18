@@ -83,7 +83,7 @@ var createFooterTotals = function (hour) {
   return sum;
 };
 
-var makeFooter = function (){
+var makeFooter = function () {
   var footRow = document.createElement('tr');
   footRow.id = 'foot-totals';
   foot.appendChild(footRow);
@@ -113,8 +113,25 @@ var makeFooter = function (){
 };
 
 var removeFooter = function () {
-  var footRowLoc = document.getElementById('foot-totals');
-  foot.firstChild.removeChild();
+  foot.firstChild.remove();
+};
+
+var newTotal = function () {
+
+  for (var d = (Store.cookieStores.length - 1); d < Store.cookieStores.length; d++) {
+    var storeRow = document.getElementById(Store.cookieStores[d].storeName);
+
+    var sum = 0;
+
+    for (var f = 0; f < storeHours.length; f++) {
+      sum += Store.cookieStores[d].cookieSales[f];
+    }
+
+    var storeSum = document.createElement('td');
+    storeSum.textContent = sum;
+    storeRow.appendChild(storeSum);
+  }
+
 };
 
 var createStoreTotals = function () {
@@ -153,6 +170,7 @@ var newRow = function (event) {
   new Store(nameStore, custMin, custMax, cookieAvg);
 
   Store.cookieStores[Store.cookieStores.length - 1].render();
+  newTotal();
   removeFooter();
   makeFooter();
   form.reset();
